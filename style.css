@@ -2,10 +2,54 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    border: 2px solid red;
+    /* border: 2px solid red; */
 }
 
 body {
+    border: 4px solid orange;
     text-align: center;
     min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    border: 8px solid green;
+    height: 220px;
+    width: 420px;
+    position: relative;
+}
+
+.bc-container {
+    border: 6px solid purple;
+    height: 100%;
+    width: 100%;
+}
+
+.bc-up {
+    border: 4px solid blue;
+    background: grey;
+    width: 100%;
+    height: 20%;
+}
+
+.bc-down {
+    border: 4px solid black;
+    background: brown;
+    width: 100%;
+    height: 80%;
+}
+
+.info-container {
+
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 12px solid grey;
+
+    top: 0;
+    left: 0;
 }
