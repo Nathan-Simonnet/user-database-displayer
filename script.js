@@ -9,7 +9,15 @@ const userDisplayer = function (data) {
 
     for (let i = 0; i < data.length; i++) {
 
-        const currentDateOfBirth = data[i].dob.date;
+
+        const calculateDaysSinceRegistration = function (registerDateString) {
+            const registerDate = new Date(registerDateString);
+            const currentDate = new Date();
+            const timeDifference = currentDate - registerDate;
+            const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+            return daysDifference;
+        }
 
         const dobParser = function (dateOfBirth) {
             let dobArray = dateOfBirth.split("T");
@@ -23,15 +31,6 @@ const userDisplayer = function (data) {
 
             return finalDateOfBirth.join("/")
         }
-
-
-        // Quentin: name.first
-        // Maurel: name.last
-
-        // Glasgow: location.city
-        // 12/12/1994: dob.date
-
-        // registered: registered.date
 
         document.querySelector('main').innerHTML += `
     
@@ -47,10 +46,9 @@ const userDisplayer = function (data) {
         <h3>${data[i].name.first} + ${data[i].name.last}</h3>
         <p>${data[i].location.city}</p>
         <p>${dobParser(currentDateOfBirth)}</p>
-        <p>fnsf</p>
+        <p>Membre depuis: ${daysSinceRegistrationCalculate(data[i].registered.date)}</p>
     </div>
     </div>
-    
     `}
 
 }
