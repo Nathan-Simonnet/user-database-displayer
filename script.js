@@ -10,7 +10,7 @@ const userDisplayer = function (data) {
     for (let i = 0; i < data.length; i++) {
 
 
-        const calculateDaysSinceRegistration = function (registerDateString) {
+        const registrationDaysCalculate = function (registerDateString) {
             const registerDate = new Date(registerDateString);
             const currentDate = new Date();
             const timeDifference = currentDate - registerDate;
@@ -45,8 +45,8 @@ const userDisplayer = function (data) {
         </div>
         <h3>${data[i].name.first} + ${data[i].name.last}</h3>
         <p>${data[i].location.city}</p>
-        <p>${dobParser(currentDateOfBirth)}</p>
-        <p>Membre depuis: ${daysSinceRegistrationCalculate(data[i].registered.date)}</p>
+        <p>${dobParser(data[i].dob.date)}</p>
+        <p>Membre depuis: ${registrationDaysCalculate(data[i].registered.date)}</p>
     </div>
     </div>
     `}
