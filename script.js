@@ -1,15 +1,15 @@
 // https://randomuser.me/api/?results=24
 console.log("userdb");
-
+const main = document.querySelector('main');
 
 let data = [];
 
+
+// Display data from userFetcher using createElement abnd appendChild
 const userDisplayer = function (data) {
 
 
     for (let i = 0; i < data.length; i++) {
-
-
         const registrationDaysCalculate = function (registerDateString) {
             const registerDate = new Date(registerDateString);
             const currentDate = new Date();
@@ -32,26 +32,57 @@ const userDisplayer = function (data) {
             return finalDateOfBirth.join("/")
         }
 
-        document.querySelector('main').innerHTML += `
-    
-    <div class="card">
-    <div class="bc-container">
-        <div class="bc-up"></div>
-        <div class="bc-down"> </div>
-    </div>
-    <div class="info-container">
-    <div class="img-container">
-            <img src="${data[i].picture.medium}" alt="${data[i].name.first}" picture>
-        </div>
-        <h3>${data[i].name.first} + ${data[i].name.last}</h3>
-        <p>${data[i].location.city}</p>
-        <p>${dobParser(data[i].dob.date)}</p>
-        <p>Membre depuis: ${registrationDaysCalculate(data[i].registered.date)}</p>
-    </div>
-    </div>
-    `}
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const bcContainer = document.createElement('div');
+        bcContainer.classList.add('bc-container');
+
+        const bcUp = document.createElement('div');
+        bcUp.classList.add('bc-up');
+        bcContainer.appendChild(bcUp);
+
+        const bcDown = document.createElement('div');
+        bcDown.classList.add('bc-down');
+        bcContainer.appendChild(bcDown);
+
+        card.appendChild(bcContainer);
+
+        const infoContainer = document.createElement('div');
+        infoContainer.classList.add('info-container');
+
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('img-container');
+        const img = document.createElement('img');
+        img.src = data[i].picture.medium;
+        img.alt = data[i].name.first;
+        imgContainer.appendChild(img);
+        infoContainer.appendChild(imgContainer);
+
+        const h3 = document.createElement('h3');
+        h3.textContent = `${data[i].name.first} + ${data[i].name.last}`;
+        infoContainer.appendChild(h3);
+
+        const cityParagraph = document.createElement('p');
+        cityParagraph.textContent = data[i].location.city;
+        infoContainer.appendChild(cityParagraph);
+
+        const dobParagraph = document.createElement('p');
+        dobParagraph.textContent = dobParser(data[i].dob.date);
+        infoContainer.appendChild(dobParagraph);
+
+        const registrationParagraph = document.createElement('p');
+        registrationParagraph.textContent = `Membre depuis: ${registrationDaysCalculate(data[i].registered.date)}`;
+        infoContainer.appendChild(registrationParagraph);
+
+        card.appendChild(infoContainer);
+
+        main.appendChild(card);
+    }
 
 }
+
+// Automatic fetch from https://randomuser.me
 
 const userFetcher = async function () {
     fetch('https://randomuser.me/api/?results=24 ')
